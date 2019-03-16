@@ -48,7 +48,7 @@ class Manager:
     def _processDelete(self, file_id, **kwargs):
         pass
 
-    def _processSearch(self):
+    def _processSearch(self, title, authors, genre, location, tags):
         pass
 
     '''

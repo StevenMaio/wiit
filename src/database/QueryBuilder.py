@@ -18,13 +18,19 @@ class QueryBuilder:
         Adds a column to the query result.
     '''
     def addColumn(self, column):
-        self._fields.append(column)
+        if column is None:
+            return
+        else:
+            self._fields.append(column)
 
     '''
         Adds a condition to the query.
     '''
     def addCondition(self, key):
-        self._conditions.append(key)
+        if key is None:
+            return
+        else:
+            self._conditions.append(key)
 
     '''
         Sets the table which is searched by the query.
@@ -37,12 +43,14 @@ class QueryBuilder:
         a string of the query.
     '''
     def build(self):
-        # Break if there is no table
         table = self._table
+        fields = self._fields
+        conditions = self._conditions
+
+        # Break if there is no table
         if table == None:
             return None
 
-        fields = self._fields
         if len(fields) == 0:
             fields_str = '*'
         else:
@@ -50,22 +58,12 @@ class QueryBuilder:
             for x in fields[1:]:
                 fields_str += ', {}'.format(x)
 
-        conditions = self._conditions
         if len(conditions) == 0:
             query_string = QUERY_TEMPLATE_NO_CONDITION.format(table, fields_str)
         else:
-            init_condition = QUERY_CONDITION_FINAL.format(conditions[-1])
-            conditions_str = None
+            conditions_str = QUERY_CONDITION_FINAL.format(conditions[-1])
             for cond in conditions[:-1]:
-                if conditions_str is None:
-                    conditions_str = QUERY_CONDITION.format(cond, EMPTY_SPACE)
-                else:
-                    conditions_str = conditions_str.format(QUERY_CONDITION.format(cond, EMPTY_SPACE))
-
-            if conditions_str is None:
-                conditions_str = init_condition
-            else:
-                conditions_str = conditions_str.format(init_condition)
+                conditions_str += QUERY_CONDITION.format(cond)
             query_string = QUERY_TEMPLATE.format(fields_str, table, conditions_str)
 
         return query_string
