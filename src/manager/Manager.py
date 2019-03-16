@@ -27,6 +27,14 @@ class Manager:
 		self._db_interface.close()
 
 	def _processAdd(self, title, authors, genre, location, tags, **kwargs):
+		# Check for missing arguments
+		if title is None\
+				or authors is None\
+				or genre is None\
+				or location is None\
+				or tags is None:
+			print('Error : Missing arguments')
+			return
 		file_id = self._db_interface.addFile(title=title,
 						authors=authors,
 						genre=genre,
