@@ -20,6 +20,7 @@ class Book:
         self._detailed_print = detailed_print
 
     def __str__(self):
+        return 'TITLE: {}; ID: {}; GENRE: {}'.format(self._title, self._book_id, self._genre)
         pass
 
     def getLocation(self):

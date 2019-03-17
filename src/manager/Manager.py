@@ -1,6 +1,8 @@
 '''
 '''
 from src.database.DBInterface import DBInterface
+from src.database.QueryBuilder import QueryBuilder, ConditionType
+from src.database.queries import *
 from src.config.config import PDF_READER
 
 import subprocess
@@ -48,8 +50,24 @@ class Manager:
     def _processDelete(self, file_id, **kwargs):
         pass
 
-    def _processSearch(self, title, authors, genre, location, tags):
-        pass
+    def _processSearch(self, file_id, title, authors, genre, tags, **kwargs):
+        queryBuilder = QueryBuilder()
+        queryBuilder.setTable(TABLE_FILES)
+        if file_id != None:
+            queryBuilder.addCondition(key=ATTR_ID, condition_type=ConditionType.EQUALITY)
+        if title != None:
+            queryBuilder.addCondition(key=ATTR_TITLE, condition_type=ConditionType.LIKE)
+        if genre != None:
+            queryBuilder.addCondition(key=ATTR_GENRE, condition_type=ConditionType.LIKE)
+        query = queryBuilder.build()
+        results = self._db_interface.query(query_string=query,
+                                           file_id=file_id, 
+                                           title=title,
+                                           authors=authors,
+                                           genre=genre,
+                                           tags=tags)
+        for r in results:
+            print(r)
 
     '''
             Helper method which processes opening a file
