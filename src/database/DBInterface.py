@@ -48,6 +48,9 @@ class DBInterface:
         book = Book(row=result)
         return book
 
+    '''
+        Queries for results based on the arguments given.
+    '''
     def query(self, query_string, file_id, title, authors, genre, tags, **kwargs):
         parameters = []
         if file_id != None:
