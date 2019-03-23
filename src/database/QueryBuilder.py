@@ -48,9 +48,11 @@ class QueryBuilder:
     '''
         Adds a condition to the query.
     '''
-    def addCondition(self, key, condition_type, value=None):
+    def addCondition(self, key, condition_type, value):
+        if value is None:
+            return self
         if not key is None:
-            self._conditions.append((key, condition_type))
+            self._conditions.append((key, condition_type, value))
         return self
 
     '''
@@ -65,8 +67,24 @@ class QueryBuilder:
         a string of the query.
     '''
     def build(self):
+        command = self._command
+        if command == Command.SELECT:
+            return self._build_search_string()
+        elif command == Command.DELETE:
+            return self._build_delete_string()
+        elif command == Command.INSERT:
+            return self._build_insert_string()
+        else:
+            return None
+
+    '''
+        Helper method which builds a query string for a search
+        @return Returns a tuple of the form (query_string, parameters) whose
+                first element is the query string to be executed by the sql
+    '''
+    def _build_search_string(self):
         def get_condition_statement(pair):
-            attribute, condition_type = pair
+            attribute, condition_type, value = pair
             if condition_type == ConditionType.EQUALITY:
                 return QUERY_CONDITION_EQUAL.format(attribute)
             else:
@@ -75,6 +93,7 @@ class QueryBuilder:
         table = self._table
         fields = self._fields
         conditions = self._conditions
+        params = list(map(lambda x: x[2], conditions))
 
         # Break if there is no table
         if table == None:
@@ -95,16 +114,29 @@ class QueryBuilder:
                 conditions_str += AND + get_condition_statement(cond)
             query_string = QUERY_TEMPLATE.format(fields_str, table, conditions_str)
 
-        return query_string
+        return query_string, tuple(params)
+
+    def _build_delete_string(self):
+        pass
+
+    def _build_insert_string(self):
+        pass
 
 
 # DEBUG
 if __name__ == '__main__':
     qb = QueryBuilder()
+    qb.setCommand(Command.SELECT)
     qb.setTable("FILES")
     qb.addColumn("TITLE")
     qb.addColumn("LOCATION")
-    qb.addCondition(key="TITLE", condition_type=ConditionType.LIKE)
-    qb.addCondition(key="TAG", condition_type=ConditionType.LIKE)
-    qb.addCondition(key="FILE_ID", condition_type=ConditionType.EQUALITY)
+    qb.addCondition(key="TITLE",
+                    condition_type=ConditionType.LIKE,
+                    value="EE")
+    qb.addCondition(key="TAG",
+                    condition_type=ConditionType.LIKE,
+                    value=["Epp"])
+    qb.addCondition(key="FILE_ID",
+                    condition_type=ConditionType.EQUALITY,
+                    value=3)
     print(qb.build())

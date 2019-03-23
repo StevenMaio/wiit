@@ -51,16 +51,8 @@ class DBInterface:
     '''
         Queries for results based on the arguments given.
     '''
-    def query(self, query_string, file_id, title, authors, genre, tags, **kwargs):
-        parameters = []
-        if file_id != None:
-            parameters.append(file_id)
-        if title != None:
-            parameters.append(title)
-        if genre != None:
-            parameters.append(genre)
-        args = tuple(parameters)
-        query = self.connection.execute(query_string, args)
+    def query(self, query_string, fields):
+        query = self.connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
 
