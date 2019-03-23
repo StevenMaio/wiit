@@ -10,13 +10,21 @@ import subprocess
 
 
 '''
+    Manager class.
+    Processes commands.
+    @author Steven Maio
 '''
 class Manager:
 
     def __init__(self):
         self._db_interface = DBInterface()
 
-    def start(self, action, **kwargs):
+    '''
+        Starts the program and performs a command based on the value of
+        action.
+        @param action The command being performed by wiit
+    '''
+    def start(self, action : str, **kwargs):
         if action == 'add':
                 self._processAdd(**kwargs)
         elif action == 'edit':
@@ -29,7 +37,11 @@ class Manager:
                 self._processOpen(**kwargs)
         self._db_interface.close()
 
-    def _processAdd(self, title, authors, genre, location, tags, **kwargs):
+    def _processAdd(self, title : str, authors : list, genre : str,
+            location : str, tags : list, **kwargs):
+#        queryBuilder = QueryBuilder()
+#        queryBuilder.setCommand(Command.INSERT)
+#        queryBuilder.setTable(TABLE_FILES)
         # Check for missing arguments
         if title is None\
                 or authors is None\
@@ -58,7 +70,7 @@ class Manager:
         queryBuilder.setCommand(Command.SELECT)
         queryBuilder.setTable(TABLE_FILES)
         queryBuilder.addCondition(key=ATTR_ID,
-                                  condition_type=ConditionType.EQUALITY
+                                  condition_type=ConditionType.EQUALITY,
                                   value=file_id)
         queryBuilder.addCondition(key=ATTR_TITLE,
                                   condition_type=ConditionType.LIKE,
