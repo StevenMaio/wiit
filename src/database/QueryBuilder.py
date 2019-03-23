@@ -1,4 +1,4 @@
-'''
+'''@package src.database.QueryBuilder
     @author: Steven Maio
 '''
 from src.database.queries import *
@@ -10,41 +10,55 @@ class ConditionType(Enum):
     LIKE = 2
     IN = 3
 
+class Command(Enum):
+    NO_COMMAND = 0
+    INSERT = 1
+    SELECT = 2
+    DELETE = 3
 
 class QueryBuilder:
 
+    INSERT_TEMPLATE = "INSERT INTO {} ({}) VALUES ({})" 
+    QUERY_TEMPLATE = "SELECT {} FROM {} WHERE {}"
+    DELETE_TEMPLATE = "SELECT {} FROM {} WHERE {}"
 
     '''
         Initializes an empty QueryBuilder instance.
     '''
     def __init__(self):
+        self._command = Command.NO_COMMAND
         self._fields = []
         self._conditions = []
         self._table = None
 
     '''
+        Sets the command field of the query.
+    '''
+    def setCommand(self, command):
+        self._command = command
+
+    '''
         Adds a column to the query result.
     '''
     def addColumn(self, column):
-        if column is None:
-            return
-        else:
+        if not column is None:
             self._fields.append(column)
+        return self
 
     '''
         Adds a condition to the query.
     '''
-    def addCondition(self, key, condition_type):
-        if key is None:
-            return
-        else:
+    def addCondition(self, key, condition_type, value=None):
+        if not key is None:
             self._conditions.append((key, condition_type))
+        return self
 
     '''
         Sets the table which is searched by the query.
     '''
     def setTable(self, table):
         self._table = table
+        return self
 
     '''
         Takes in the current fields of the QueryBuilder instance, and produces
