@@ -6,6 +6,7 @@
 	@author	: Steven Maio
 	@date	: 03/08/2019
 '''
+
 from src.database.queries import *
 from src.database.Book import Book
 from src.config.config import DATABASE
@@ -30,7 +31,7 @@ class DBInterface:
             Helper method which initializes the database for this program (this
             includes the tables, etc.).
     '''
-    def _init_database(self, database_name):
+    def _init_database(self, database_name) -> sqlite3.Connection:
         connection = sqlite3.connect(database_name)
         connection.execute(INIT_TABLE_FILES)
         connection.execute(INIT_TABLE_TAGS)
@@ -41,7 +42,7 @@ class DBInterface:
     '''
         Queries for one result, and returns the result deserialized as a Book.
     '''
-    def queryOne(self, file_id):
+    def queryOne(self, file_id : int) -> Book:
         parameters = [(file_id)]
         query = self.connection.execute(QUERY_FILE_BY_ID, parameters)
         result = query.fetchone()
@@ -51,7 +52,7 @@ class DBInterface:
     '''
         Queries for results based on the arguments given.
     '''
-    def query(self, query_string, fields):
+    def query(self, query_string, fields) -> list:
         query = self.connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
@@ -59,7 +60,8 @@ class DBInterface:
     '''
             Inserts a file into the table.
     '''
-    def addFile(self, title, authors, genre, location, tags):
+    def addFile(self, title : str, authors : list, genre : str,
+            location : str, tags : list) -> int:
         #Change location to absolute location
         location = os.path.abspath(location)
         connection = self.connection

@@ -21,10 +21,9 @@ class Book:
 
     def __str__(self):
         return 'TITLE: {}; ID: {}; GENRE: {}'.format(self._title, self._book_id, self._genre)
-        pass
 
-    def getLocation(self):
+    def getLocation(self) -> str:
         return self._location
 
-    def getTitle(self):
+    def getTitle(self) -> str:
         return self._title

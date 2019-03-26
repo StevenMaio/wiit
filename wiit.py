@@ -5,10 +5,10 @@
 	@author	: smaio
 	@date	: 03/08/2019
 '''
+
 from src.manager.Manager import Manager
 
 import argparse
-import sqlite3
 
 
 def main(**kwargs):

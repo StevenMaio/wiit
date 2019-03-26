@@ -10,6 +10,10 @@ class ConditionType(Enum):
     LIKE = 2
     IN = 3
 
+'''
+    Inherts from Enum
+    Enum class representing the tables used by the application
+'''
 class Table(Enum):
     FILES = 1
     TAGS = 2
@@ -69,7 +73,7 @@ class QueryBuilder:
             Builds a query string based on the fields of the QueryBuilder
             @return An SQL query to be executed
         '''
-        def build(self):
+        def build(self) -> str:
             pass
 
     class _SearchQueryBuilder:
@@ -149,14 +153,9 @@ class QueryBuilder:
             return query_string, tuple(params)
 
 
-
 # DEBUG
 if __name__ == '__main__':
-    import pdb; pdb.set_trace()
-    ins = QueryBuilder.InsertQueryBuilder()
-    ser = QueryBuilder.SearchQueryBuilder()
-    qb = QueryBuilder()
-    qb.setCommand(Command.SELECT)
+    qb = QueryBuilder.createSearchQueryBuilder()
     qb.setTable("FILES")
     qb.addColumn("TITLE")
     qb.addColumn("LOCATION")
