@@ -39,9 +39,9 @@ class Manager:
 
     def _processAdd(self, title : str, authors : list, genre : str,
             location : str, tags : list, **kwargs):
-#        queryBuilder = QueryBuilder()
-#        queryBuilder.setCommand(Command.INSERT)
-#        queryBuilder.setTable(TABLE_FILES)
+        queryBuilder = QueryBuilder()
+        queryBuilder.setCommand(Command.INSERT)
+        queryBuilder.setTable(TABLE_FILES)
         # Check for missing arguments
         if title is None\
                 or authors is None\
