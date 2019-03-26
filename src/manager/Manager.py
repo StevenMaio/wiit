@@ -16,6 +16,9 @@ import subprocess
 '''
 class Manager:
 
+    '''
+        Constructs an instace of the Manager class.
+    '''
     def __init__(self):
         self._db_interface = DBInterface()
 
@@ -26,17 +29,18 @@ class Manager:
     '''
     def start(self, action : str, **kwargs):
         if action == 'add':
-                self._processAdd(**kwargs)
+            self._processAdd(**kwargs)
         elif action == 'edit':
-                self._processEdit(**kwargs)
+            self._processEdit(**kwargs)
         elif action == 'delete':
-                self._processDelete(**kwargs)
+            self._processDelete(**kwargs)
         elif action == 'search':
-                self._processSearch(**kwargs)
+            self._processSearch(**kwargs)
         elif action == 'open':
-                self._processOpen(**kwargs)
+            self._processOpen(**kwargs)
         self._db_interface.close()
 
+    # Helper method which processes an add command
     def _processAdd(self, title : str, authors : list, genre : str,
             location : str, tags : list, **kwargs):
         queryBuilder = QueryBuilder.createInsertQueryBuilder()
@@ -50,20 +54,23 @@ class Manager:
             print('Error : Missing arguments')
             return
         file_id = self._db_interface.addFile(title=title,
-                                        authors=authors,
-                                        genre=genre,
-                                        location=location,
-                                        tags=tags)
+                                             authors=authors,
+                                             genre=genre,
+                                             location=location,
+                                             tags=tags)
         print('File successfully added with id: {}'.format(file_id))
 
+    # Helper method which processes an edit command
     def _processEdit(self):
         # TODO: Implement this
         pass
 
+    # Helper method which processes an delete command
     def _processDelete(self, file_id, **kwargs):
         # TODO: Implement this
         pass
 
+    # Helper method which processes an search command
     def _processSearch(self, file_id, title, authors, genre, tags, **kwargs):
         queryBuilder = QueryBuilder.createSearchQueryBuilder()
         queryBuilder.setTable(TABLE_FILES)

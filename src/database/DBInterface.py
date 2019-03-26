@@ -1,10 +1,10 @@
 '''
-	The DB interface for the application. Handles queries and other
-	interactions with the database.
+    The DB interface for the application. Handles queries and other
+    interactions with the database.
 
-	@name	: .\src\database\DBInterface.py
-	@author	: Steven Maio
-	@date	: 03/08/2019
+    @name	: .\src\database\DBInterface.py
+    @author	: Steven Maio
+    @date	: 03/08/2019
 '''
 
 from src.database.queries import *
@@ -23,15 +23,17 @@ class DBInterface:
     def __init__(self, database_name=DATABASE):
         # TODO: Determine if the database already exists
         if os.path.isfile(database_name):
-                self.connection = sqlite3.connect(database_name)
+            self.connection = sqlite3.connect(database_name)
         else:
-                self.connection = self._init_database(database_name)
+            self.connection = self._init_database(database_name)
 
     '''
-            Helper method which initializes the database for this program (this
-            includes the tables, etc.).
+        Helper method which initializes the database for this program (this
+        includes the tables, etc.).
+
+        @param database_name The name of the database
     '''
-    def _init_database(self, database_name) -> sqlite3.Connection:
+    def _init_database(self, database_name : str) -> sqlite3.Connection:
         connection = sqlite3.connect(database_name)
         connection.execute(INIT_TABLE_FILES)
         connection.execute(INIT_TABLE_TAGS)
@@ -58,7 +60,7 @@ class DBInterface:
         return results
 
     '''
-            Inserts a file into the table.
+        Inserts a file into the table.
     '''
     def addFile(self, title : str, authors : list, genre : str,
             location : str, tags : list) -> int:
@@ -66,22 +68,22 @@ class DBInterface:
         location = os.path.abspath(location)
         connection = self.connection
         cursor = connection.cursor()
-        # Insert the book into the DB
+        #Insert the book into the DB
         args = (title, genre, location)
         cursor.execute(INSERT_FILE, args)
         file_id = cursor.lastrowid
-        # Insert each author into the authored table
+        #Insert each author into the authored table
         for a in authors:
-                args = (file_id, a)
-                connection.execute(INSERT_AUTHORED, args)
-        # Insert each tag into the tags table
+            args = (file_id, a)
+            connection.execute(INSERT_AUTHORED, args)
+        #Insert each tag into the tags table
         for t in tags:
-                args = (file_id, t)
-                connection.execute(INSERT_TAG, args)
+            args = (file_id, t)
+            connection.execute(INSERT_TAG, args)
         return file_id
 
     '''
-            Commits all changes to the database and then closes the connection.
+        Commits all changes to the database and then closes the connection.
     '''
     def close(self):
         self.connection.commit()
