@@ -2,7 +2,7 @@
     Contains the Manager class
 '''
 from src.database.DBInterface import DBInterface
-from src.database.QueryBuilder import QueryBuilder, ConditionType, Command
+from src.database.QueryBuilder import QueryBuilder, ConditionType
 from src.database.queries import *
 from src.config.config import PDF_READER
 
@@ -39,8 +39,7 @@ class Manager:
 
     def _processAdd(self, title : str, authors : list, genre : str,
             location : str, tags : list, **kwargs):
-        queryBuilder = QueryBuilder()
-        queryBuilder.setCommand(Command.INSERT)
+        queryBuilder = QueryBuilder.createInsertQueryBuilder()
         queryBuilder.setTable(TABLE_FILES)
         # Check for missing arguments
         if title is None\
@@ -66,8 +65,7 @@ class Manager:
         pass
 
     def _processSearch(self, file_id, title, authors, genre, tags, **kwargs):
-        queryBuilder = QueryBuilder()
-        queryBuilder.setCommand(Command.SELECT)
+        queryBuilder = QueryBuilder.createSearchQueryBuilder()
         queryBuilder.setTable(TABLE_FILES)
         queryBuilder.addCondition(key=ATTR_ID,
                                   condition_type=ConditionType.EQUALITY,
