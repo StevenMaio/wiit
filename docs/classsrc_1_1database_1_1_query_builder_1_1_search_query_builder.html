@@ -75,6 +75,15 @@ $(function() {
 
 <p>A builder class used to construct search queries.  
  <a href="classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for src.database.QueryBuilder.SearchQueryBuilder:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.png" usemap="#src.database.QueryBuilder.SearchQueryBuilder_map" alt=""/>
+  <map id="src.database.QueryBuilder.SearchQueryBuilder_map" name="src.database.QueryBuilder.SearchQueryBuilder_map">
+<area href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html" title="A builder class used to construct querie strings." alt="src.database.QueryBuilder.QueryBuilder" shape="rect" coords="0,0,286,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -90,6 +99,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8921d20885f03cf0cf95ef5cbf42716a"><td class="memItemLeft" align="right" valign="top">(str, tuple)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html#a8921d20885f03cf0cf95ef5cbf42716a">build</a> (self)</td></tr>
 <tr class="memdesc:a8921d20885f03cf0cf95ef5cbf42716a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method which builds a query string for a search.  <a href="#a8921d20885f03cf0cf95ef5cbf42716a">More...</a><br /></td></tr>
 <tr class="separator:a8921d20885f03cf0cf95ef5cbf42716a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html">src.database.QueryBuilder.QueryBuilder</a></td></tr>
+<tr class="memitem:ab8cf8f0668e51be65bf9a0592a9f3e5d inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html">InsertQueryBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#ab8cf8f0668e51be65bf9a0592a9f3e5d">createInsertQueryBuilder</a> ()</td></tr>
+<tr class="memdesc:ab8cf8f0668e51be65bf9a0592a9f3e5d inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of an <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html" title="A builder class used to construct insert queries.">InsertQueryBuilder</a>.  <a href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#ab8cf8f0668e51be65bf9a0592a9f3e5d">More...</a><br /></td></tr>
+<tr class="separator:ab8cf8f0668e51be65bf9a0592a9f3e5d inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa2c66071678182cbc522ef2aae22af9 inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html">SearchQueryBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#aaa2c66071678182cbc522ef2aae22af9">createSearchQueryBuilder</a> ()</td></tr>
+<tr class="memdesc:aaa2c66071678182cbc522ef2aae22af9 inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance of an <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html" title="A builder class used to construct search queries.">SearchQueryBuilder</a>.  <a href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#aaa2c66071678182cbc522ef2aae22af9">More...</a><br /></td></tr>
+<tr class="separator:aaa2c66071678182cbc522ef2aae22af9 inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A builder class used to construct search queries. </p>
@@ -198,6 +217,8 @@ Public Member Functions</h2></td></tr>
 
 <p>Helper method which builds a query string for a search. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns a tuple of the form (query_string, parameters) whose first element is the query string to be executed by the sql </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#ad11f610934572660a6bc12bf6a22ab81">src.database.QueryBuilder.QueryBuilder</a>.</p>
 
 </div>
 </div>

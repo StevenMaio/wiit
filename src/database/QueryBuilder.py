@@ -36,18 +36,21 @@ class Table(Enum):
     #   @return the name of the table whose enum value is given by **value**
     @staticmethod
     def getString(value : int) -> str:
-        if value == Tables.FILES:
+        if value == Table.FILES:
             return "FILES"
-        elif value == Tables.TAGS:
+        elif value == Table.TAGS:
             return "TAGS"
-        elif value == Tables.AUTHORS:
-            return "AUTHORS"
+        elif value == Table.AUTHORS:
+            return "AUTHORED"
         else:
             return None
 
+class QueryBuilder:
+    pass
+
 ##  A builder class used to construct insert queries
 #
-class InsertQueryBuilder:
+class InsertQueryBuilder(QueryBuilder):
         
     def __init__(self):
         self._values = []
@@ -76,7 +79,7 @@ class InsertQueryBuilder:
         values = self._values
         # return None if there are no values being inserted
         if len(values) == 0:
-            return None
+            return None, None
 
         col, val = values[0]
         column_string = col
@@ -93,7 +96,7 @@ class InsertQueryBuilder:
 
 ##  A builder class used to construct search queries
 #
-class SearchQueryBuilder:
+class SearchQueryBuilder(QueryBuilder):
 
     def __init__(self):
         self._fields = []
@@ -186,6 +189,11 @@ class QueryBuilder:
     @staticmethod
     def createSearchQueryBuilder() -> SearchQueryBuilder:
         return SearchQueryBuilder()
+
+    ##  Abstract method 
+    #   Builds a query string and returns it and its parameters upon completion
+    def build(self) -> (str, tuple):
+        raise NotImplementedError
 
 
 # DEBUG

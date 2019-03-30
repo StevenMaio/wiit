@@ -5,6 +5,7 @@
 
 from src.database.queries import *
 from src.database.Book import Book
+from src.database.QueryBuilder import QueryBuilder, Table
 from src.config.config import DATABASE
 
 import sqlite3
@@ -52,7 +53,7 @@ class DBInterface:
     #
     #   @param query_string the query to be executed
     #   @param fields the valued used in prepared statements
-    def query(self, query_string, fields=()) -> list:
+    def query(self, query_string, fields=()) -> [Book]:
         query = self.connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
@@ -70,21 +71,37 @@ class DBInterface:
         location = os.path.abspath(location)
         connection = self.connection
         cursor = connection.cursor()
+
         #Insert the book into the DB
-        args = (title, genre, location)
-        cursor.execute(INSERT_FILE, args)
+        insertBuilder = QueryBuilder.createInsertQueryBuilder()
+        insertBuilder.setTable(Table.FILES)
+        insertBuilder.addValue("title", title)
+        insertBuilder.addValue("genre", genre)
+        insertBuilder.addValue("location", location)
+        query, args = insertBuilder.build()
+        cursor.execute(query, args)
         file_id = cursor.lastrowid
+
         #Insert each author into the authored table
         for a in authors:
-            args = (file_id, a)
-            connection.execute(INSERT_AUTHORED, args)
+            insertBuilder = QueryBuilder.createInsertQueryBuilder()
+            insertBuilder.setTable(Table.AUTHORS)
+            insertBuilder.addValue("author", a)
+            insertBuilder.addValue("file_id", file_id)
+            query, args = insertBuilder.build()
+            connection.execute(query, args)
+
         #Insert each tag into the tags table
         for t in tags:
-            args = (file_id, t)
-            connection.execute(INSERT_TAG, args)
+            insertBuilder = QueryBuilder.createInsertQueryBuilder()
+            insertBuilder.setTable(Table.TAGS)
+            insertBuilder.addValue("tag", t)
+            insertBuilder.addValue("file_id", file_id)
+            query, args = insertBuilder.build()
+            connection.execute(query, args)
         return file_id
 
     ##  Commits all changes to the database and then closes the connection.
-    def close(self):
+    def close(self) -> None:
         self.connection.commit()
         self.connection.close()
