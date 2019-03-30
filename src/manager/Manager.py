@@ -1,6 +1,8 @@
-'''@package src.manager.Manager
-    Contains the Manager class
-'''
+##  @package src.manager.Manager
+#   Contains the Manager class
+#
+#   /author Steven Maio
+
 from src.database.DBInterface import DBInterface
 from src.database.QueryBuilder import QueryBuilder, ConditionType
 from src.database.queries import *
@@ -9,24 +11,23 @@ from src.config.config import PDF_READER
 import subprocess
 
 
-'''
-    Manager class.
-    Processes commands.
-    @author Steven Maio
-'''
+##  The manager class used to control the flow of the application
+#
 class Manager:
 
-    '''
-        Constructs an instace of the Manager class.
-    '''
+    ##  Constructs a Manager instance
+    #
+    #   Initializes a connection to the database
     def __init__(self):
+        ##  The interface through which the application interacts with the
+        #   database.
         self._db_interface = DBInterface()
 
-    '''
-        Starts the program and performs a command based on the value of
-        action.
-        @param action The command being performed by wiit
-    '''
+    ##  Starts the program and performs a command based on the value of
+    #   action.
+    #
+    #   @param action The command being performed by wiit
+    #   @param kwargs key arguments used by the actions the program supports
     def start(self, action : str, **kwargs):
         if action == 'add':
             self._processAdd(**kwargs)

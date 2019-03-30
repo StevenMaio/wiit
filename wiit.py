@@ -1,16 +1,17 @@
-'''
-	The startpoint of the application.
-
-	@name	: .\pdf_mgmt.py
-	@author	: smaio
-	@date	: 03/08/2019
-'''
+##  @package wiit
+#   The startpoint of the application.
+#   @name	: .\pdf_mgmt.py
+#   @author	: smaio
+#   @date	: 03/08/2019
 
 from src.manager.Manager import Manager
 
 import argparse
 
 
+## The main function of wiit
+#
+#   @param kwargs key word arguments used by Manager
 def main(**kwargs):
 	manager = Manager()
 	manager.start(**kwargs)

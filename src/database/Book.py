@@ -1,15 +1,20 @@
-'''
-	@author : Steven Maio
-	@date : 03/15/2019
-'''
+##  @package src.database.Book
+#
+#   Contains the Book class
+#   \author Steven Maio
 
 
-'''
-    Book class.
-'''
+##  A class encaspulting the join of the Files, Tags, and Authored Tables
+#
 class Book:
 
-    def __init__(self, row, authors=[], tags=[], detailed_print=False):
+    ## Constructs a new instance of a Book
+    #
+    #   @param row a row in the Files database
+    #   @param authors a list of the authors who authored the book identified
+    #           by row
+    #   @param tags the tags describing the book
+    def __init__(self, row, authors=[], tags=[]):
         book_id, title, genre, location = row
         self._book_id = book_id
         self._title = title
@@ -22,8 +27,14 @@ class Book:
     def __str__(self):
         return 'TITLE: {}; ID: {}; GENRE: {}'.format(self._title, self._book_id, self._genre)
 
+    ##  Accessor method for the location field
+    #
+    #   @return returns the location of the book
     def getLocation(self) -> str:
         return self._location
 
+    ##  Accessor method for the title of the book
+    #
+    #   @return the title of the book
     def getTitle(self) -> str:
         return self._title
