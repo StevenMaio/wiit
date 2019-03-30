@@ -9,8 +9,6 @@ from src.config.config import DATABASE
 
 import sqlite3
 import os
-import functools
-import operator
 
 ## A class which interacts with a database
 #
@@ -21,7 +19,8 @@ class DBInterface:
     #
     #   @param database_name the path to the database
     def __init__(self, database_name=DATABASE):
-        # TODO: Determine if the database already exists
+        # Determine if the database already exists, and create one if it
+        # doesn't
         if os.path.isfile(database_name):
             self.connection = sqlite3.connect(database_name)
         else:

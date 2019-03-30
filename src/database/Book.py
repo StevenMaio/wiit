@@ -22,9 +22,8 @@ class Book:
         self._location = location
         self._authors = authors
         self._tags = tags
-        self._detailed_print = detailed_print
 
-    def __str__(self):
+    def __str__(self) -> str:
         return 'TITLE: {}; ID: {}; GENRE: {}'.format(self._title, self._book_id, self._genre)
 
     ##  Accessor method for the location field

@@ -90,9 +90,7 @@ class Manager:
         for r in results:
             print(r)
 
-    '''
-            Helper method which processes opening a file
-    '''
+    # Helper method which processes opening a file
     def _processOpen(self, file_id, **kwargs):
         result = self._db_interface.queryOne(file_id=file_id)
         location = result.getLocation()

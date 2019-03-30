@@ -2,6 +2,7 @@
 #   \author Steven Maio
 
 from src.database.queries import *
+
 from enum import Enum
 
 ##  Conditional enums used to build queries
@@ -33,7 +34,6 @@ class Table(Enum):
     #   @param value the enum value of the table
     #
     #   @return the name of the table whose enum value is given by **value**
-    #   @static
     @staticmethod
     def getString(value : int) -> str:
         if value == Tables.FILES:
@@ -44,28 +44,6 @@ class Table(Enum):
             return "AUTHORS"
         else:
             return None
-
-##  A builder class used to construct querie strings
-#
-class QueryBuilder:
-
-    INSERT_TEMPLATE = "INSERT INTO {} ({}) VALUES ({})" 
-    QUERY_TEMPLATE = "SELECT {} FROM {} WHERE {}"
-    DELETE_TEMPLATE = "SELECT {} FROM {} WHERE {}"
-
-    ##  Creates a new instance of an InsertQueryBuilder
-    #
-    #   @return a recently instantiated InsertQueryBuilder
-    @staticmethod
-    def createInsertQueryBuilder():
-        return InsertQueryBuilder()
-
-    ##  Creates a new instance of an SearchQueryBuilder
-    #
-    #   @return a recently instantiated SearchQueryBuilder
-    @staticmethod
-    def createSearchQueryBuilder():
-        return SearchQueryBuilder()
 
 ##  A builder class used to construct insert queries
 #
@@ -78,21 +56,40 @@ class InsertQueryBuilder:
     ##  Sets the value of the table in which a row is being inserted.
     #
     #   @param table an enum value indicating the table in questoin
-    def setTable(self, table : Table):
+    def setTable(self, table : Table) -> None:
         self._table = Table.getString(table)
 
     ##  Adds a value to be inserted in the row in the database 
     #
     #   @param column_name The name of the column
     #   @param value The value beinged inserted into the column 
-    def addValue(self, column_name : str, value : object):
+    def addValue(self, column_name : str, value : object) -> None:
         self._values.append((column_name, value))
 
     ##  Builds a query string based on the fields of the QueryBuilder
     #
-    #   @return An SQL query to be executed
-    def build(self) -> str:
-        pass
+    #   @return a tuple of the form (**query**, **args**), where query is a
+    #   string of the query to be executed, and args is itself a tuple
+    #   containing the values for the place holder arguments
+    def build(self) -> (str, tuple):
+        table = self._table
+        values = self._values
+        # return None if there are no values being inserted
+        if len(values) == 0:
+            return None
+
+        col, val = values[0]
+        column_string = col
+        placeholder_string = '?'
+        params = [val]
+        for col, val in values[1:]:
+            params.append(val)
+            column_string += ', ' + col
+            placeholder_string += ', ?'
+        query = QueryBuilder.INSERT_TEMPLATE.format(table,
+                                                    column_string,
+                                                    placeholder_string)
+        return query, tuple(params)
 
 ##  A builder class used to construct search queries
 #
@@ -106,14 +103,14 @@ class SearchQueryBuilder:
     ##  Sets the table to be queried
     #   
     #   @param table the table being queried
-    def setTable(self, table : str):
+    def setTable(self, table : str) -> None:
         self._table = table
 
 
     ##  Adds a column to the query result.
     #   
     #   @param column another column retrieved by the search results
-    def addColumn(self, column : str):
+    def addColumn(self, column : str) -> None:
         if not column is None:
             self._fields.append(column)
         else:
@@ -124,7 +121,8 @@ class SearchQueryBuilder:
     #   @param column the being inspected by the condition
     #   @param value the value with which the columns are compared
     #   @param condition_type the binary relation used to filter results
-    def addCondition(self, column : str, value : object, condition_type : ConditionType):
+    def addCondition(self, column : str, value : object,
+            condition_type : ConditionType) -> None:
         if not column is None:
             self._conditions.append((column, condition_type, value))
         else:
@@ -133,7 +131,7 @@ class SearchQueryBuilder:
     ##  Helper method which builds a query string for a search
     #   @return Returns a tuple of the form (query_string, parameters) whose
     #           first element is the query string to be executed by the sql
-    def build(self) -> str:
+    def build(self) -> (str, tuple):
         def get_condition_statement(pair):
             attribute, condition_type, value = pair
             if condition_type == ConditionType.EQUALITY:
@@ -166,6 +164,28 @@ class SearchQueryBuilder:
             query_string = QUERY_TEMPLATE.format(fields_str, table, conditions_str)
 
         return query_string, tuple(params)
+
+##  A builder class used to construct querie strings
+#
+class QueryBuilder:
+
+    INSERT_TEMPLATE = "INSERT INTO {} ({}) VALUES ({})" 
+    QUERY_TEMPLATE = "SELECT {} FROM {} WHERE {}"
+    DELETE_TEMPLATE = "SELECT {} FROM {} WHERE {}"
+
+    ##  Creates a new instance of an InsertQueryBuilder
+    #
+    #   @return a recently instantiated InsertQueryBuilder
+    @staticmethod
+    def createInsertQueryBuilder() -> InsertQueryBuilder:
+        return InsertQueryBuilder()
+
+    ##  Creates a new instance of an SearchQueryBuilder
+    #
+    #   @return a recently instantiated SearchQueryBuilder
+    @staticmethod
+    def createSearchQueryBuilder() -> SearchQueryBuilder:
+        return SearchQueryBuilder()
 
 
 # DEBUG

@@ -12,7 +12,7 @@ import argparse
 ## The main function of wiit
 #
 #   @param kwargs key word arguments used by Manager
-def main(**kwargs):
+def main(**kwargs) -> None:
 	manager = Manager()
 	manager.start(**kwargs)
 
