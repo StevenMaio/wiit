@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['where_20is_20it_3f',['Where is it?',['../md__r_e_a_d_m_e.html',1,'']]],
-  ['wiit',['wiit',['../namespacewiit.html',1,'']]]
+  ['table',['Table',['../classsrc_1_1database_1_1_query_builder_1_1_table.html',1,'src::database::QueryBuilder']]],
+  ['tags',['TAGS',['../classsrc_1_1database_1_1_query_builder_1_1_table.html#a31b7b133944f8dd493988a269cf7f363',1,'src::database::QueryBuilder::Table']]]
 ];

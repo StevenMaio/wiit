@@ -1,11 +1,7 @@
-'''
-    The DB interface for the application. Handles queries and other
-    interactions with the database.
-
-    @name	: .\src\database\DBInterface.py
-    @author	: Steven Maio
-    @date	: 03/08/2019
-'''
+##  The DB interface for the application. Handles queries and other
+#   interactions with the database.
+#
+#   \author Steven Maio
 
 from src.database.queries import *
 from src.database.Book import Book
@@ -16,10 +12,14 @@ import os
 import functools
 import operator
 
-'''
-'''
+## A class which interacts with a database
+#
 class DBInterface:
 
+    ##  Constructs a new instance of DBInterface. Initializes a connection with
+    #   the database specified in the configuration
+    #
+    #   @param database_name the path to the database
     def __init__(self, database_name=DATABASE):
         # TODO: Determine if the database already exists
         if os.path.isfile(database_name):
@@ -27,12 +27,10 @@ class DBInterface:
         else:
             self.connection = self._init_database(database_name)
 
-    '''
-        Helper method which initializes the database for this program (this
-        includes the tables, etc.).
-
-        @param database_name The name of the database
-    '''
+    #   Helper method which initializes the database for this program (this
+    #   includes the tables, etc.).
+    #
+    #   @param database_name The name of the database
     def _init_database(self, database_name : str) -> sqlite3.Connection:
         connection = sqlite3.connect(database_name)
         connection.execute(INIT_TABLE_FILES)
@@ -41,9 +39,9 @@ class DBInterface:
         connection.commit()
         return connection
 
-    '''
-        Queries for one result, and returns the result deserialized as a Book.
-    '''
+    ##  Queries for a specific entry in the files table
+    #
+    #   @param file_id the id of the entry in the database
     def queryOne(self, file_id : int) -> Book:
         parameters = [(file_id)]
         query = self.connection.execute(QUERY_FILE_BY_ID, parameters)
@@ -51,17 +49,22 @@ class DBInterface:
         book = Book(row=result)
         return book
 
-    '''
-        Queries for results based on the arguments given.
-    '''
-    def query(self, query_string, fields) -> list:
+    ##  Queries for results based on the arguments given.
+    #
+    #   @param query_string the query to be executed
+    #   @param fields the valued used in prepared statements
+    def query(self, query_string, fields=()) -> list:
         query = self.connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
 
-    '''
-        Inserts a file into the table.
-    '''
+    ##  Inserts a file into the table.
+    #   
+    #   @param title the title of the entry being added
+    #   @param authors a list of the authors of the entry
+    #   @param genre the genre of the entry being added
+    #   @param location the path to the file
+    #   @param tags a list of the tags describing the entry
     def addFile(self, title : str, authors : list, genre : str,
             location : str, tags : list) -> int:
         #Change location to absolute location
@@ -82,9 +85,7 @@ class DBInterface:
             connection.execute(INSERT_TAG, args)
         return file_id
 
-    '''
-        Commits all changes to the database and then closes the connection.
-    '''
+    ##  Commits all changes to the database and then closes the connection.
     def close(self):
         self.connection.commit()
         self.connection.close()

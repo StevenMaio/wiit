@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['manager',['Manager',['../classsrc_1_1manager_1_1_manager_1_1_manager.html',1,'src::manager::Manager']]]
+  ['insertquerybuilder',['InsertQueryBuilder',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html',1,'src::database::QueryBuilder']]]
 ];

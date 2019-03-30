@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['settable',['setTable',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#a42ff73183d24308763325c2778782714',1,'src.database.QueryBuilder.InsertQueryBuilder.setTable()'],['../classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html#ac6bbf88387cc79e70ad429d06359bb60',1,'src.database.QueryBuilder.SearchQueryBuilder.setTable()']]],
-  ['start',['start',['../classsrc_1_1manager_1_1_manager_1_1_manager.html#af02e81caf294347a9d15f0f83d18ba28',1,'src::manager::Manager::Manager']]]
+  ['query',['query',['../classsrc_1_1database_1_1_d_b_interface_1_1_d_b_interface.html#a16b6e0349e5d0de28c36650aacdc25ae',1,'src::database::DBInterface::DBInterface']]],
+  ['queryone',['queryOne',['../classsrc_1_1database_1_1_d_b_interface_1_1_d_b_interface.html#a2b75aa2420d1cacffc020114f233421e',1,'src::database::DBInterface::DBInterface']]]
 ];

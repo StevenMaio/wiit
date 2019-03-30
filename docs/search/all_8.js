@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['like',['LIKE',['../classsrc_1_1database_1_1_query_builder_1_1_condition_type.html#a7f0f73348c17a6c6738e3406167f8e70',1,'src::database::QueryBuilder::ConditionType']]]
+  ['in',['IN',['../classsrc_1_1database_1_1_query_builder_1_1_condition_type.html#a207a5ce980759980ecfb286b7bbfad5b',1,'src::database::QueryBuilder::ConditionType']]],
+  ['insertquerybuilder',['InsertQueryBuilder',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html',1,'src::database::QueryBuilder']]]
 ];

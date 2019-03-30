@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['in',['IN',['../classsrc_1_1database_1_1_query_builder_1_1_condition_type.html#a207a5ce980759980ecfb286b7bbfad5b',1,'src::database::QueryBuilder::ConditionType']]],
-  ['insertquerybuilder',['InsertQueryBuilder',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html',1,'src::database::QueryBuilder']]]
+  ['getlocation',['getLocation',['../classsrc_1_1database_1_1_book_1_1_book.html#af62de15468f53490708c6fbc5c8214fe',1,'src::database::Book::Book']]],
+  ['getstring',['getString',['../classsrc_1_1database_1_1_query_builder_1_1_table.html#ab79151c1e756cf78a1f79298b40c9227',1,'src::database::QueryBuilder::Table']]],
+  ['gettitle',['getTitle',['../classsrc_1_1database_1_1_book_1_1_book.html#a51f77bb8a8834dfc00f01027169e13f0',1,'src::database::Book::Book']]]
 ];
