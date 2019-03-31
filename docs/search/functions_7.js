@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['settable',['setTable',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#ae329cf9a5edc563d9a4cbd4262ab811e',1,'src.database.QueryBuilder.InsertQueryBuilder.setTable()'],['../classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html#a22d89cd8166eb461753ed279eb9f45fc',1,'src.database.QueryBuilder.SearchQueryBuilder.setTable()']]],
+  ['settable',['setTable',['../classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#ae329cf9a5edc563d9a4cbd4262ab811e',1,'src.database.QueryBuilder.InsertQueryBuilder.setTable()'],['../classsrc_1_1database_1_1_query_builder_1_1_search_query_builder.html#a22d89cd8166eb461753ed279eb9f45fc',1,'src.database.QueryBuilder.SearchQueryBuilder.setTable()'],['../classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html#a1c123f1bfcea74e5217950d5ce30d4e2',1,'src.database.QueryBuilder.DeleteQueryBuilder.setTable()']]],
   ['start',['start',['../classsrc_1_1manager_1_1_manager_1_1_manager.html#af02e81caf294347a9d15f0f83d18ba28',1,'src::manager::Manager::Manager']]]
 ];

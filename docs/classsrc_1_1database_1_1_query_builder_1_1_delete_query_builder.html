@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>wiit: src.database.QueryBuilder.InsertQueryBuilder Class Reference</title>
+<title>wiit: src.database.QueryBuilder.DeleteQueryBuilder Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,41 +61,41 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>src</b></li><li class="navelem"><b>database</b></li><li class="navelem"><a class="el" href="namespacesrc_1_1database_1_1_query_builder.html">QueryBuilder</a></li><li class="navelem"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html">InsertQueryBuilder</a></li>  </ul>
+<li class="navelem"><b>src</b></li><li class="navelem"><b>database</b></li><li class="navelem"><a class="el" href="namespacesrc_1_1database_1_1_query_builder.html">QueryBuilder</a></li><li class="navelem"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html">DeleteQueryBuilder</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder-members.html">List of all members</a>  </div>
+<a href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">src.database.QueryBuilder.InsertQueryBuilder Class Reference</div>  </div>
+<div class="title">src.database.QueryBuilder.DeleteQueryBuilder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A builder class used to construct insert queries.  
- <a href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#details">More...</a></p>
+<p>A builder class for delete statements in SQL.  
+ <a href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for src.database.QueryBuilder.InsertQueryBuilder:</div>
+Inheritance diagram for src.database.QueryBuilder.DeleteQueryBuilder:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.png" usemap="#src.database.QueryBuilder.InsertQueryBuilder_map" alt=""/>
-  <map id="src.database.QueryBuilder.InsertQueryBuilder_map" name="src.database.QueryBuilder.InsertQueryBuilder_map">
-<area href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html" title="A builder class used to construct querie strings." alt="src.database.QueryBuilder.QueryBuilder" shape="rect" coords="0,0,276,24"/>
+  <img src="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.png" usemap="#src.database.QueryBuilder.DeleteQueryBuilder_map" alt=""/>
+  <map id="src.database.QueryBuilder.DeleteQueryBuilder_map" name="src.database.QueryBuilder.DeleteQueryBuilder_map">
+<area href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html" title="A builder class used to construct querie strings." alt="src.database.QueryBuilder.QueryBuilder" shape="rect" coords="0,0,281,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae329cf9a5edc563d9a4cbd4262ab811e"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#ae329cf9a5edc563d9a4cbd4262ab811e">setTable</a> (self, <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_table.html">Table</a> table)</td></tr>
-<tr class="memdesc:ae329cf9a5edc563d9a4cbd4262ab811e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the table in which a row is being inserted.  <a href="#ae329cf9a5edc563d9a4cbd4262ab811e">More...</a><br /></td></tr>
-<tr class="separator:ae329cf9a5edc563d9a4cbd4262ab811e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1c20e1928b0985d22cf9d98779461ee"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#ad1c20e1928b0985d22cf9d98779461ee">addValue</a> (self, str column_name, object value)</td></tr>
-<tr class="memdesc:ad1c20e1928b0985d22cf9d98779461ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a value to be inserted in the row in the database.  <a href="#ad1c20e1928b0985d22cf9d98779461ee">More...</a><br /></td></tr>
-<tr class="separator:ad1c20e1928b0985d22cf9d98779461ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7e6268e7873f7bcb5d7a7111daba776"><td class="memItemLeft" align="right" valign="top">(str, tuple)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_insert_query_builder.html#af7e6268e7873f7bcb5d7a7111daba776">build</a> (self)</td></tr>
-<tr class="memdesc:af7e6268e7873f7bcb5d7a7111daba776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a query string based on the fields of the <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html" title="A builder class used to construct querie strings.">QueryBuilder</a>.  <a href="#af7e6268e7873f7bcb5d7a7111daba776">More...</a><br /></td></tr>
-<tr class="separator:af7e6268e7873f7bcb5d7a7111daba776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c123f1bfcea74e5217950d5ce30d4e2"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html#a1c123f1bfcea74e5217950d5ce30d4e2">setTable</a> (self, str table)</td></tr>
+<tr class="memdesc:a1c123f1bfcea74e5217950d5ce30d4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the table to be queried.  <a href="#a1c123f1bfcea74e5217950d5ce30d4e2">More...</a><br /></td></tr>
+<tr class="separator:a1c123f1bfcea74e5217950d5ce30d4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a843f4b946afefcea96561cb40db44062"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html#a843f4b946afefcea96561cb40db44062">addCondition</a> (self, str column, object value, <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_condition_type.html">ConditionType</a> condition_type)</td></tr>
+<tr class="memdesc:a843f4b946afefcea96561cb40db44062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a condition to the query.  <a href="#a843f4b946afefcea96561cb40db44062">More...</a><br /></td></tr>
+<tr class="separator:a843f4b946afefcea96561cb40db44062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615021963d9078c1788fc98cbe616314"><td class="memItemLeft" align="right" valign="top">(str, tuple)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_delete_query_builder.html#a615021963d9078c1788fc98cbe616314">build</a> (self)</td></tr>
+<tr class="memdesc:a615021963d9078c1788fc98cbe616314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method which builds a delete statement string in SQL.  <a href="#a615021963d9078c1788fc98cbe616314">More...</a><br /></td></tr>
+<tr class="separator:a615021963d9078c1788fc98cbe616314"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -111,16 +111,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:adb9cc48b635ebc07ff71a3446d96dd56 inherit pub_static_methods_classsrc_1_1database_1_1_query_builder_1_1_query_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A builder class used to construct insert queries. </p>
+<div class="textblock"><p>A builder class for delete statements in SQL. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad1c20e1928b0985d22cf9d98779461ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1c20e1928b0985d22cf9d98779461ee">&#9670;&nbsp;</a></span>addValue()</h2>
+<a id="a843f4b946afefcea96561cb40db44062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a843f4b946afefcea96561cb40db44062">&#9670;&nbsp;</a></span>addCondition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> None src.database.QueryBuilder.InsertQueryBuilder.addValue </td>
+          <td class="memname"> None src.database.QueryBuilder.DeleteQueryBuilder.addCondition </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -129,13 +129,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">str&#160;</td>
-          <td class="paramname"><em>column_name</em>, </td>
+          <td class="paramname"><em>column</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">object&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_condition_type.html">ConditionType</a>&#160;</td>
+          <td class="paramname"><em>condition_type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -145,25 +151,26 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds a value to be inserted in the row in the database. </p>
+<p>Adds a condition to the query. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">column_name</td><td>The name of the column </td></tr>
-    <tr><td class="paramname">value</td><td>The value beinged inserted into the column </td></tr>
+    <tr><td class="paramname">column</td><td>the being inspected by the condition </td></tr>
+    <tr><td class="paramname">value</td><td>the value with which the columns are compared </td></tr>
+    <tr><td class="paramname">condition_type</td><td>the binary relation used to filter results </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="af7e6268e7873f7bcb5d7a7111daba776"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7e6268e7873f7bcb5d7a7111daba776">&#9670;&nbsp;</a></span>build()</h2>
+<a id="a615021963d9078c1788fc98cbe616314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615021963d9078c1788fc98cbe616314">&#9670;&nbsp;</a></span>build()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> (str, tuple) src.database.QueryBuilder.InsertQueryBuilder.build </td>
+          <td class="memname"> (str, tuple) src.database.QueryBuilder.DeleteQueryBuilder.build </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -172,21 +179,21 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Builds a query string based on the fields of the <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html" title="A builder class used to construct querie strings.">QueryBuilder</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>a tuple of the form (<b>query</b>, <b>args</b>), where query is a string of the query to be executed, and args is itself a tuple containing the values for the place holder arguments </dd></dl>
+<p>Helper method which builds a delete statement string in SQL. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a tuple of the form (query_string, parameters) whose first element is the query string to be executed by the sql </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_query_builder.html#ad11f610934572660a6bc12bf6a22ab81">src.database.QueryBuilder.QueryBuilder</a>.</p>
 
 </div>
 </div>
-<a id="ae329cf9a5edc563d9a4cbd4262ab811e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae329cf9a5edc563d9a4cbd4262ab811e">&#9670;&nbsp;</a></span>setTable()</h2>
+<a id="a1c123f1bfcea74e5217950d5ce30d4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c123f1bfcea74e5217950d5ce30d4e2">&#9670;&nbsp;</a></span>setTable()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> None src.database.QueryBuilder.InsertQueryBuilder.setTable </td>
+          <td class="memname"> None src.database.QueryBuilder.DeleteQueryBuilder.setTable </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -194,7 +201,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsrc_1_1database_1_1_query_builder_1_1_table.html">Table</a>&#160;</td>
+          <td class="paramtype">str&#160;</td>
           <td class="paramname"><em>table</em>&#160;</td>
         </tr>
         <tr>
@@ -205,10 +212,10 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the value of the table in which a row is being inserted. </p>
+<p>Sets the table to be queried. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">table</td><td>an enum value indicating the table in questoin </td></tr>
+    <tr><td class="paramname">table</td><td>the table being queried </td></tr>
   </table>
   </dd>
 </dl>
