@@ -69,7 +69,7 @@ class InsertQueryBuilder(QueryBuilder):
     def addValue(self, column_name : str, value : object) -> None:
         self._values.append((column_name, value))
 
-    ##  Builds a query string based on the fields of the QueryBuilder
+    ##  Builds an insert statement string in SQL
     #
     #   @return a tuple of the form (**query**, **args**), where query is a
     #   string of the query to be executed, and args is itself a tuple
@@ -131,7 +131,8 @@ class SearchQueryBuilder(QueryBuilder):
         else:
             self._conditions.append((column, condition_type, value))
 
-    ##  Helper method which builds a query string for a search
+    ##  Builds a search statement in SQL
+    #
     #   @return Returns a tuple of the form (query_string, parameters) whose
     #           first element is the query string to be executed by the sql
     def build(self) -> (str, tuple):
