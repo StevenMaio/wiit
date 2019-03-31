@@ -194,12 +194,13 @@ class DeleteQueryBuilder(QueryBuilder):
         else:
             self._conditions.append((column, condition_type, value))
 
-    ##  Helper method which builds a delete statement string in SQL
+    ##  Builder a delete statement in SQL
+    #
     #   @return Returns a tuple of the form (query_string, parameters) whose
     #           first element is the query string to be executed by the sql
     def build(self) -> (str, tuple):
-        # helper inner method which generates a string in the WHERE statement
         def get_condition_statement(pair):
+            # helper inner method which generates a string in the WHERE statement
             attribute, condition_type, value = pair
             if condition_type == ConditionType.EQUALITY:
                 return QUERY_CONDITION_EQUAL.format(attribute)
