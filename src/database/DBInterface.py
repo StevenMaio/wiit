@@ -23,9 +23,9 @@ class DBInterface:
         # Determine if the database already exists, and create one if it
         # doesn't
         if os.path.isfile(database_name):
-            self.connection = sqlite3.connect(database_name)
+            self._connection = sqlite3.connect(database_name)
         else:
-            self.connection = self._init_database(database_name)
+            self._connection = self._init_database(database_name)
 
     #   Helper method which initializes the database for this program (this
     #   includes the tables, etc.).
@@ -44,7 +44,7 @@ class DBInterface:
     #   @param file_id the id of the entry in the database
     def queryOne(self, file_id : int) -> Book:
         parameters = [(file_id)]
-        query = self.connection.execute(QUERY_FILE_BY_ID, parameters)
+        query = self._connection.execute(QUERY_FILE_BY_ID, parameters)
         result = query.fetchone()
         book = Book(row=result)
         return book
@@ -54,9 +54,15 @@ class DBInterface:
     #   @param query_string the query to be executed
     #   @param fields the valued used in prepared statements
     def query(self, query_string, fields=()) -> [Book]:
-        query = self.connection.execute(query_string, fields)
+        query = self._connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
+
+    def delete(self, statement, fields) -> int:
+        cursor = self._connection.cursor()
+        cursor.execute(statement, fields)
+        row_count = cursor.rowcount
+        return row_count
 
     ##  Inserts a file into the table.
     #   
@@ -69,7 +75,7 @@ class DBInterface:
             location : str, tags : list) -> int:
         #Change location to absolute location
         location = os.path.abspath(location)
-        connection = self.connection
+        connection = self._connection
         cursor = connection.cursor()
 
         #Insert the book into the DB
@@ -103,5 +109,5 @@ class DBInterface:
 
     ##  Commits all changes to the database and then closes the connection.
     def close(self) -> None:
-        self.connection.commit()
-        self.connection.close()
+        self._connection.commit()
+        self._connection.close()

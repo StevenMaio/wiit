@@ -4,11 +4,12 @@
 #   /author Steven Maio
 
 from src.database.DBInterface import DBInterface
-from src.database.QueryBuilder import QueryBuilder, ConditionType
+from src.database.QueryBuilder import QueryBuilder, ConditionType, Table
 from src.database.queries import *
 from src.config.config import PDF_READER
 
 import subprocess
+from prettytable import PrettyTable
 
 
 ##  The manager class used to control the flow of the application
@@ -67,28 +68,52 @@ class Manager:
         pass
 
     # Helper method which processes an delete command
-    def _processDelete(self, file_id, **kwargs):
-        # TODO: Implement this
-        pass
+    def _processDelete(self, file_id, title, genre, **kwargs):
+        deleteBuilder = QueryBuilder.createDeleteQueryBuilder()
+        deleteBuilder.setTable(Table.FILES)
+        deleteBuilder.addCondition(column=ATTR_ID,
+                                   value=file_id,
+                                   condition_type=ConditionType.EQUALITY)
+        deleteBuilder.addCondition(column=ATTR_TITLE,
+                                   value=title,
+                                   condition_type=ConditionType.LIKE)
+        deleteBuilder.addCondition(column=ATTR_GENRE,
+                                   value=genre,
+                                   condition_type=ConditionType.LIKE)
+        statement, fields = deleteBuilder.build()
+        print(statement)
+        rows_deleted = self._db_interface.delete(statement=statement,
+                                                 fields=fields)
+        print("{} rows deleted".format(rows_deleted))
+
 
     # Helper method which processes an search command
     def _processSearch(self, file_id, title, authors, genre, tags, **kwargs):
         queryBuilder = QueryBuilder.createSearchQueryBuilder()
         queryBuilder.setTable(TABLE_FILES)
-        queryBuilder.addCondition(key=ATTR_ID,
-                                  condition_type=ConditionType.EQUALITY,
-                                  value=file_id)
-        queryBuilder.addCondition(key=ATTR_TITLE,
-                                  condition_type=ConditionType.LIKE,
-                                  value=title)
-        queryBuilder.addCondition(key=ATTR_GENRE,
-                                  condition_type=ConditionType.LIKE,
-                                  value=genre)
+        queryBuilder.addCondition(column=ATTR_ID,
+                                  value=file_id,
+                                  condition_type=ConditionType.EQUALITY)
+        queryBuilder.addCondition(column=ATTR_TITLE,
+                                  value=title,
+                                  condition_type=ConditionType.LIKE)
+        queryBuilder.addCondition(column=ATTR_GENRE,
+                                  value=genre,
+                                  condition_type=ConditionType.LIKE)
         query, fields = queryBuilder.build()
         results = self._db_interface.query(query_string=query,
                                            fields=fields)
-        for r in results:
-            print(r)
+        table = PrettyTable()
+        table.field_names = [
+            "ID", "Title", "Authors",
+            "Genre", "Tags"
+        ]
+        if len(results) == 0:
+            print("No files were found")
+        else:
+            for r in results:
+                table.add_row(r.toTuple())
+            print(table)
 
     # Helper method which processes opening a file
     def _processOpen(self, file_id, **kwargs):

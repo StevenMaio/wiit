@@ -126,10 +126,10 @@ class SearchQueryBuilder(QueryBuilder):
     #   @param condition_type the binary relation used to filter results
     def addCondition(self, column : str, value : object,
             condition_type : ConditionType) -> None:
-        if not column is None:
-            self._conditions.append((column, condition_type, value))
-        else:
+        if column is None or value is None:
             pass
+        else:
+            self._conditions.append((column, condition_type, value))
 
     ##  Helper method which builds a query string for a search
     #   @return Returns a tuple of the form (query_string, parameters) whose
@@ -168,13 +168,64 @@ class SearchQueryBuilder(QueryBuilder):
 
         return query_string, tuple(params)
 
+## A builder class for delete statements in SQL
+#
+class DeleteQueryBuilder(QueryBuilder):
+
+    def __init__(self):
+        self._conditions = []
+        self._table = None
+
+    ##  Sets the table to be queried
+    #   
+    #   @param table the table being queried
+    def setTable(self, table : str) -> None:
+        self._table = Table.getString(table)
+
+    ##  Adds a condition to the query.
+    #
+    #   @param column the being inspected by the condition
+    #   @param value the value with which the columns are compared
+    #   @param condition_type the binary relation used to filter results
+    def addCondition(self, column : str, value : object,
+            condition_type : ConditionType) -> None:
+        if column is None or value is None:
+            pass
+        else:
+            self._conditions.append((column, condition_type, value))
+
+    ##  Helper method which builds a delete statement string in SQL
+    #   @return Returns a tuple of the form (query_string, parameters) whose
+    #           first element is the query string to be executed by the sql
+    def build(self) -> (str, tuple):
+        # helper inner method which generates a string in the WHERE statement
+        def get_condition_statement(pair):
+            attribute, condition_type, value = pair
+            if condition_type == ConditionType.EQUALITY:
+                return QUERY_CONDITION_EQUAL.format(attribute)
+            else:
+                return QUERY_CONDITION_LIKE.format(attribute)
+        table = self._table
+        conditions = self._conditions
+
+        # return nothing if there are no conditions, or no table is selected
+        if len(conditions) == 0 or table == None:
+            return None, None
+
+        conditions_str = get_condition_statement(conditions[0])
+        for cond in conditions[1:]:
+            conditions_str += AND + get_condition_statement(cond)
+        statement = QueryBuilder.DELETE_TEMPLATE.format(table, conditions_str)
+        params = list(map(lambda x: x[2], conditions))
+        return statement, tuple(params)
+
 ##  A builder class used to construct querie strings
 #
 class QueryBuilder:
 
     INSERT_TEMPLATE = "INSERT INTO {} ({}) VALUES ({})" 
     QUERY_TEMPLATE = "SELECT {} FROM {} WHERE {}"
-    DELETE_TEMPLATE = "SELECT {} FROM {} WHERE {}"
+    DELETE_TEMPLATE = "DELETE FROM {} WHERE {}"
 
     ##  Creates a new instance of an InsertQueryBuilder
     #
@@ -190,6 +241,13 @@ class QueryBuilder:
     def createSearchQueryBuilder() -> SearchQueryBuilder:
         return SearchQueryBuilder()
 
+    ## Creates a new instance of DeleteQueryBuilder
+    #
+    #   @return a new instance of DeleteQueryBuilder
+    @staticmethod
+    def createDeleteQueryBuilder() -> DeleteQueryBuilder:
+        return DeleteQueryBuilder()
+
     ##  Abstract method 
     #   Builds a query string and returns it and its parameters upon completion
     def build(self) -> (str, tuple):
@@ -202,13 +260,19 @@ if __name__ == '__main__':
     qb.setTable("FILES")
     qb.addColumn("TITLE")
     qb.addColumn("LOCATION")
-    qb.addCondition(key="TITLE",
+    qb.addCondition(column="TITLE",
                     condition_type=ConditionType.LIKE,
                     value="EE")
-    qb.addCondition(key="TAG",
+    qb.addCondition(column="TAG",
                     condition_type=ConditionType.LIKE,
                     value=["Epp"])
-    qb.addCondition(key="FILE_ID",
+    qb.addCondition(column="FILE_ID",
                     condition_type=ConditionType.EQUALITY,
                     value=3)
+    db = QueryBuilder.createDeleteQueryBuilder()
+    db.setTable("FILES")
+    db.addCondition(column="TITLE",
+                    value="Hello!!!",
+                    condition_type=ConditionType.LIKE)
     print(qb.build())
+    print(db.build())

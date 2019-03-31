@@ -26,6 +26,18 @@ class Book:
     def __str__(self) -> str:
         return 'TITLE: {}; ID: {}; GENRE: {}'.format(self._title, self._book_id, self._genre)
 
+    ## Returns a tuple representation of the table
+    #
+    #   @return a tuple used to print the instance in a PrettyTable
+    def toTuple(self) -> tuple:
+        return (
+            self._book_id,
+            self._title,
+            self._authors,
+            self._genre,
+            self._tags
+        )
+
     ##  Accessor method for the location field
     #
     #   @return returns the location of the book
