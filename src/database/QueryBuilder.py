@@ -1,9 +1,11 @@
 ##  @package src.database.QueryBuilder
 #   \author Steven Maio
 
+from typing import Tuple
 from src.database.queries import *
 
 from enum import Enum
+
 
 ##  Conditional enums used to build queries
 #
@@ -74,7 +76,7 @@ class InsertQueryBuilder(QueryBuilder):
     #   @return a tuple of the form (**query**, **args**), where query is a
     #   string of the query to be executed, and args is itself a tuple
     #   containing the values for the place holder arguments
-    def build(self) -> (str, tuple):
+    def build(self) -> Tuple[str, tuple]:
         table = self._table
         values = self._values
         # return None if there are no values being inserted

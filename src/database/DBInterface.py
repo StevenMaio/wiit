@@ -10,6 +10,7 @@ from src.config.config import DATABASE
 
 import sqlite3
 import os
+from typing import List
 
 ## A class which interacts with a database
 #
@@ -53,11 +54,14 @@ class DBInterface:
     #
     #   @param query_string the query to be executed
     #   @param fields the valued used in prepared statements
-    def query(self, query_string, fields=()) -> [Book]:
+    def query(self, query_string, fields=()) -> List[Book]:
         query = self._connection.execute(query_string, fields)
         results = list(map(lambda x: Book(row=x), query.fetchall()))
         return results
 
+    ##  Runs a delete statement and returns the number of rows deleted
+    #
+    #   @return the number of rows deleted by the statement
     def delete(self, statement, fields) -> int:
         cursor = self._connection.cursor()
         cursor.execute(statement, fields)
@@ -73,12 +77,12 @@ class DBInterface:
     #   @param tags a list of the tags describing the entry
     def addFile(self, title : str, authors : list, genre : str,
             location : str, tags : list) -> int:
-        #Change location to absolute location
+        # Change location to absolute location
         location = os.path.abspath(location)
         connection = self._connection
         cursor = connection.cursor()
 
-        #Insert the book into the DB
+        # Insert the book into the DB
         insertBuilder = QueryBuilder.createInsertQueryBuilder()
         insertBuilder.setTable(Table.FILES)
         insertBuilder.addValue("title", title)
@@ -88,7 +92,7 @@ class DBInterface:
         cursor.execute(query, args)
         file_id = cursor.lastrowid
 
-        #Insert each author into the authored table
+        # Insert each author into the authored table
         for a in authors:
             insertBuilder = QueryBuilder.createInsertQueryBuilder()
             insertBuilder.setTable(Table.AUTHORS)
@@ -97,7 +101,7 @@ class DBInterface:
             query, args = insertBuilder.build()
             connection.execute(query, args)
 
-        #Insert each tag into the tags table
+        # Insert each tag into the tags table
         for t in tags:
             insertBuilder = QueryBuilder.createInsertQueryBuilder()
             insertBuilder.setTable(Table.TAGS)

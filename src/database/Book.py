@@ -3,6 +3,8 @@
 #   Contains the Book class
 #   \author Steven Maio
 
+from typing import Tuple
+
 
 ##  A class encaspulting the join of the Files, Tags, and Authored Tables
 #
